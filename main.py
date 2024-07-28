@@ -17,7 +17,7 @@ def main():
     contentView.setWindowTitle("Makieta@HomeNeo")
 
     app.setStyle("fusion")
-    app.setFont(QFont("Helvetica", int(16*contentView.guiScale)))
+    app.setFont(QFont("!", int(18*contentView.guiScale)))
 
     app.exec()
 
