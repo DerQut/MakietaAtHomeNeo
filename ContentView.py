@@ -14,6 +14,7 @@ class ContentView(QMainWindow):
         self.app = app
 
         self.resolution = (self.app.screens()[0].size().width(), self.app.screens()[0].size().height())
+        self.guiScale = self.resolution[1]/1080
 
         self.setFixedHeight(int(self.resolution[1] / 3 * 2))
         self.setFixedWidth(int(self.resolution[0] / 3 * 2))

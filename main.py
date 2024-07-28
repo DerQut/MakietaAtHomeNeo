@@ -10,7 +10,6 @@ from ContentView import *
 
 def main():
     app = QApplication(sys.argv)
-    app.setFont(QFont("Helvetica", 16))
 
     contentView = ContentView(app)
     contentView.show()
@@ -18,6 +17,7 @@ def main():
     contentView.setWindowTitle("Makieta@HomeNeo")
 
     app.setStyle("fusion")
+    app.setFont(QFont("Helvetica", int(16*contentView.guiScale)))
 
     app.exec()
 
