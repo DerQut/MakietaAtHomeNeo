@@ -1,8 +1,9 @@
 class MacColoursDark:
 
-    bg_colour = (28, 29, 31)
-    side_bar_inactive_colour = (37, 38, 40)
-    side_bar_colour = (94, 94, 94)
+    bgColour = (28, 29, 31)
+    sidebarInactiveColour = (37, 38, 40)
+    sidebarColour = (94, 94, 94)
+    splitColour = (56, 57, 59)
 
     blue = (10, 132, 255)
     brown = (172, 142, 104)

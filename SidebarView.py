@@ -11,11 +11,11 @@ class SidebarView(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setFixedSize(int(parent.width()/3), parent.height())
+        self.setFixedWidth(int(parent.width()/3))
 
         self.parent = parent
 
-        color = Color(MacColoursDark.side_bar_inactive_colour)
+        color = Color(MacColoursDark.sidebarInactiveColour)
         zStack = QStackedLayout()
         zStack.setStackingMode(QStackedLayout.StackingMode.StackAll)
         zStack.addWidget(color)

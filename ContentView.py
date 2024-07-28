@@ -5,6 +5,8 @@ from PyQt6.QtGui import *
 
 from SidebarView import *
 from DetailView import *
+from Color import *
+from assets import *
 
 
 class ContentView(QMainWindow):
@@ -21,9 +23,17 @@ class ContentView(QMainWindow):
 
         self.navigationSplitView = QWidget(self)
         hStack = QHBoxLayout()
-        self.navigationSplitView.setLayout(hStack)
+        hStack.setSpacing(0)
+        hStack.setContentsMargins(0, 0, 0, 0)
 
         self.sidebarView = SidebarView(self)
         self.detailView = DetailView(self)
+        spacer = Color(MacColoursDark.splitColour)
+        spacer.setFixedWidth(1)
+
+        hStack.addWidget(self.sidebarView)
+        hStack.addWidget(spacer)
+        hStack.addWidget(self.detailView)
+        self.navigationSplitView.setLayout(hStack)
 
         self.setCentralWidget(self.navigationSplitView)
