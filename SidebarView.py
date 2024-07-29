@@ -53,6 +53,7 @@ class InputsView(QWidget):
         self.vContainer = QWidget()
         self.vContainer.setFixedWidth(int(444*0.75*self.sidebarView.guiScale))
         self.vStack = QVBoxLayout()
+        self.vStack.setSpacing(0)
         self.vContainer.setLayout(self.vStack)
 
         i = 0
