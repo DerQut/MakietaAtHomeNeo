@@ -13,7 +13,7 @@ class ContentView(QMainWindow):
     def __init__(self, app: QApplication):
         super().__init__()
 
-        self.inputSequence = [0, 1, 3, 2, 3, 1, 255]
+        self.inputSequence = [0, 1, 3, 2, 3, 1, 255, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.outputGraphs = []
 
         self.app = app
@@ -25,18 +25,18 @@ class ContentView(QMainWindow):
         self.setFixedWidth(int(self.resolution[0] / 3 * 2))
 
         self.navigationSplitView = QWidget(self)
-        hStack = QHBoxLayout()
-        hStack.setSpacing(0)
-        hStack.setContentsMargins(0, 0, 0, 0)
+        self.hStack = QHBoxLayout()
+        self.hStack.setSpacing(0)
+        self.hStack.setContentsMargins(0, 0, 0, 0)
 
         self.sidebarView = SidebarView(self)
         self.detailView = DetailView(self)
         spacer = Color(MacColoursDark.splitColour)
         spacer.setFixedWidth(1)
 
-        hStack.addWidget(self.sidebarView)
-        hStack.addWidget(spacer)
-        hStack.addWidget(self.detailView)
-        self.navigationSplitView.setLayout(hStack)
+        self.hStack.addWidget(self.sidebarView)
+        self.hStack.addWidget(spacer)
+        self.hStack.addWidget(self.detailView)
+        self.navigationSplitView.setLayout(self.hStack)
 
         self.setCentralWidget(self.navigationSplitView)

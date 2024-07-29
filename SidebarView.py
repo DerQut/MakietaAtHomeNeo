@@ -48,24 +48,39 @@ class InputsView(QWidget):
 
         self.sidebarView = sidebarView
 
+        self.entries = []
+
         self.setFixedHeight(int(240*self.sidebarView.guiScale))
         dummyLayout = QVBoxLayout()
         self.vContainer = QWidget()
-        self.vContainer.setFixedWidth(int(444*0.75*self.sidebarView.guiScale))
+        self.vContainer.setFixedWidth(int(336*self.sidebarView.guiScale))
+        self.superVStack = QVBoxLayout()
         self.vStack = QVBoxLayout()
         self.vStack.setSpacing(0)
-        self.vContainer.setLayout(self.vStack)
+        self.superVStack.addLayout(self.vStack)
+        self.vContainer.setLayout(self.superVStack)
+        self.superVStack.addStretch()
 
         i = 0
         while i < len(self.sidebarView.contentView.inputSequence):
-            self.vStack.addWidget(InputEntryView(self, i, self.sidebarView.contentView.inputSequence[i]))
+            entry = InputEntryView(self, i, self.sidebarView.contentView.inputSequence[i])
+            self.entries.append(entry)
+            self.vStack.addWidget(entry)
             i = i + 1
 
         self.scrollArea = QScrollArea()
+        self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setWidget(self.vContainer)
         dummyLayout.addWidget(self.scrollArea)
 
         self.setLayout(dummyLayout)
+
+    def update(self):
+        i = 0
+        while i < len(self.entries):
+            self.entries[i].identificator = i
+            self.entries[i].idLabel.setText(str(i))
+            i = i + 1
 
 
 class InputEntryView(QWidget):
@@ -80,16 +95,16 @@ class InputEntryView(QWidget):
         self.inputsView = inputsView
         hStack = QHBoxLayout()
 
-        idLabel = QLabel(str(self.identificator))
-        idLabel.setFont(QFont("Courier"))
-        idLabel.setFixedWidth(int(60*self.inputsView.sidebarView.guiScale))
-        hStack.addWidget(idLabel)
+        self.idLabel = QLabel(str(self.identificator))
+        self.idLabel.setFont(QFont("Courier"))
+        self.idLabel.setFixedWidth(int(36*self.inputsView.sidebarView.guiScale))
+        hStack.addWidget(self.idLabel)
         hStack.addStretch()
 
         self.decimalField = QLineEdit(str(self.value))
         self.decimalField.setMaxLength(3)
         self.decimalField.setFont(QFont("Courier"))
-        self.decimalField.setFixedWidth(int(72 * self.inputsView.sidebarView.guiScale))
+        self.decimalField.setFixedWidth(int(60 * self.inputsView.sidebarView.guiScale))
         hStack.addWidget(self.decimalField)
         hStack.addStretch()
 
@@ -98,11 +113,17 @@ class InputEntryView(QWidget):
         self.binaryField.setFont(QFont("Courier"))
         self.binaryField.setFixedWidth(int(132 * self.inputsView.sidebarView.guiScale))
         hStack.addWidget(self.binaryField)
+        hStack.addStretch()
+
+        self.deleteButton = QPushButton("-")
+        self.deleteButton.setFixedWidth(int(36*inputsView.sidebarView.guiScale))
+        hStack.addWidget(self.deleteButton)
 
         self.setLayout(hStack)
 
         self.binaryField.textChanged.connect(self.binaryFormat)
         self.decimalField.textChanged.connect(self.decimalFormat)
+        self.deleteButton.clicked.connect(self.remove)
 
     def binaryFormat(self):
         self.binaryField.setText(self.binaryField.text().strip())
@@ -139,3 +160,9 @@ class InputEntryView(QWidget):
 
         self.binaryField.setText(newText)
         self.inputsView.sidebarView.contentView.inputSequence[self.identificator] = int(newText, 2)
+
+    def remove(self):
+        self.inputsView.entries.remove(self)
+        self.deleteLater()
+        self.inputsView.update()
+
