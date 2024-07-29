@@ -13,6 +13,9 @@ class ContentView(QMainWindow):
     def __init__(self, app: QApplication):
         super().__init__()
 
+        self.inputSequence = [0, 1, 3, 2, 3, 1, 255]
+        self.outputGraphs = []
+
         self.app = app
 
         self.resolution = (self.app.screens()[0].size().width(), self.app.screens()[0].size().height())
