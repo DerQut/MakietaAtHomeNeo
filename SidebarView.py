@@ -115,8 +115,10 @@ class InputEntryView(QWidget):
         hStack.addWidget(self.binaryField)
         hStack.addStretch()
 
-        self.deleteButton = QPushButton("-")
-        self.deleteButton.setFixedWidth(int(36*inputsView.sidebarView.guiScale))
+        self.deleteButton = QPushButton("✕")
+        self.deleteButton.setFont(QFont("!", int(12*inputsView.sidebarView.guiScale)))
+        self.deleteButton.setFixedWidth(int(24*inputsView.sidebarView.guiScale))
+        self.deleteButton.setFixedHeight(int(24 * inputsView.sidebarView.guiScale))
         hStack.addWidget(self.deleteButton)
 
         self.setLayout(hStack)
