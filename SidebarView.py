@@ -145,6 +145,10 @@ class InputEntryView(QWidget):
             if not character.isdigit():
                 text.remove(character)
         self.decimalField.setText(''.join(text))
+
+        if int(self.decimalField.text()) > 255:
+            self.decimalField.setText("255")
+
         self.decimalToBinary()
 
     def binaryToDecimal(self):
@@ -168,3 +172,28 @@ class InputEntryView(QWidget):
         self.deleteLater()
         self.inputsView.update()
 
+
+class OutputsView(QWidget):
+    def __init__(self, sidebarView: SidebarView):
+        super().__init__()
+        self.sidebarView = sidebarView
+
+        self.entries = []
+
+        self.setFixedHeight(int(240 * self.sidebarView.guiScale))
+        dummyLayout = QVBoxLayout()
+        self.vContainer = QWidget()
+        self.vContainer.setFixedWidth(int(336 * self.sidebarView.guiScale))
+        self.superVStack = QVBoxLayout()
+        self.vStack = QVBoxLayout()
+        self.vStack.setSpacing(0)
+        self.superVStack.addLayout(self.vStack)
+        self.vContainer.setLayout(self.superVStack)
+        self.superVStack.addStretch()
+
+        self.scrollArea = QScrollArea()
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setWidget(self.vContainer)
+        dummyLayout.addWidget(self.scrollArea)
+
+        self.setLayout(dummyLayout)
