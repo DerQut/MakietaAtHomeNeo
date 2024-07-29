@@ -74,6 +74,33 @@ class InputsView(QWidget):
         self.vContainer = QWidget()
         self.vContainer.setFixedWidth(int(336*self.sidebarView.guiScale))
         self.superVStack = QVBoxLayout()
+
+        labelsHStack = QHBoxLayout()
+
+        idLabel = QLabel("id:")
+        decLabel = QLabel("dec:")
+        binaryLabel = QLabel("binary:")
+        buttonSpacer = QWidget()
+
+        idLabel.setFont(QFont("Courier"))
+        decLabel.setFont(QFont("Courier"))
+        binaryLabel.setFont(QFont("Courier"))
+        binaryLabel.setAlignment(Qt.AlignmentFlag.AlignLeading)
+
+        idLabel.setFixedWidth(int(42*self.sidebarView.guiScale))
+        decLabel.setFixedWidth(int(60*self.sidebarView.guiScale))
+        binaryLabel.setFixedWidth(int(132*self.sidebarView.guiScale))
+        buttonSpacer.setFixedWidth(int(24*self.sidebarView.guiScale))
+
+        labelsHStack.addWidget(idLabel)
+        labelsHStack.addStretch()
+        labelsHStack.addWidget(decLabel)
+        labelsHStack.addStretch()
+        labelsHStack.addWidget(binaryLabel)
+        labelsHStack.addWidget(buttonSpacer)
+
+        self.superVStack.addLayout(labelsHStack)
+
         self.vStack = QVBoxLayout()
         self.vStack.setSpacing(0)
         self.superVStack.addLayout(self.vStack)
@@ -116,7 +143,7 @@ class InputEntryView(QWidget):
 
         self.idLabel = QLabel(str(self.identificator))
         self.idLabel.setFont(QFont("Courier"))
-        self.idLabel.setFixedWidth(int(36*self.inputsView.sidebarView.guiScale))
+        self.idLabel.setFixedWidth(int(42*self.inputsView.sidebarView.guiScale))
         hStack.addWidget(self.idLabel)
         hStack.addStretch()
 
@@ -199,7 +226,7 @@ class OutputsView(QWidget):
 
         self.entries = []
 
-        self.setFixedHeight(int(288 * self.sidebarView.guiScale))
+        self.setFixedHeight(int(276 * self.sidebarView.guiScale))
         dummyLayout = QVBoxLayout()
         self.vContainer = QWidget()
         self.vContainer.setFixedWidth(int(336 * self.sidebarView.guiScale))
