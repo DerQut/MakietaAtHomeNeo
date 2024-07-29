@@ -35,7 +35,26 @@ class SidebarView(QWidget):
         self.inputsView = InputsView(self)
         self.vStack.addWidget(self.inputsView)
 
+        self.outputsView = OutputsView(self)
+        self.vStack.addWidget(self.outputsView)
+
         self.vStack.addStretch()
+
+        buttonsHStack = QHBoxLayout()
+
+        self.newButton = QPushButton("Nowa makieta")
+        self.newButton.setFixedHeight(int(48 * self.guiScale))
+
+        self.startButton = QPushButton("Uruchom")
+        self.startButton.setFixedHeight(int(48 * self.guiScale))
+        self.startButton.setStyleSheet(f"background-color: rgba{QPalette().accent().color().getRgb()};")
+        self.startButton.setFont(QFont("!", int(18 * self.guiScale)))
+
+        buttonsHStack.addWidget(self.newButton)
+        buttonsHStack.addWidget(self.startButton)
+
+        self.vStack.addLayout(buttonsHStack)
+
         self.zStack.addWidget(self.vContainer)
 
         self.zStack.setStackingMode(QStackedLayout.StackingMode.StackAll)
@@ -50,7 +69,7 @@ class InputsView(QWidget):
 
         self.entries = []
 
-        self.setFixedHeight(int(240*self.sidebarView.guiScale))
+        self.setFixedHeight(int(216*self.sidebarView.guiScale))
         dummyLayout = QVBoxLayout()
         self.vContainer = QWidget()
         self.vContainer.setFixedWidth(int(336*self.sidebarView.guiScale))
@@ -180,7 +199,7 @@ class OutputsView(QWidget):
 
         self.entries = []
 
-        self.setFixedHeight(int(240 * self.sidebarView.guiScale))
+        self.setFixedHeight(int(288 * self.sidebarView.guiScale))
         dummyLayout = QVBoxLayout()
         self.vContainer = QWidget()
         self.vContainer.setFixedWidth(int(336 * self.sidebarView.guiScale))
