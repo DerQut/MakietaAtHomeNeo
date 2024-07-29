@@ -74,7 +74,7 @@ class InputEntryView(QWidget):
         self.value = value
         self.identificator = identificator
 
-        self.setFixedHeight(int(48*inputsView.sidebarView.guiScale))
+        self.setFixedHeight(int(60*inputsView.sidebarView.guiScale))
 
         self.inputsView = inputsView
         hStack = QHBoxLayout()
