@@ -25,6 +25,7 @@ class ContentView(QMainWindow):
             [],
             []
         ]
+        self.boards = []
 
         self.app = app
         print(self.app.primaryScreen().size())

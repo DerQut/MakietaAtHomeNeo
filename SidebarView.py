@@ -35,6 +35,11 @@ class SidebarView(QWidget):
         periodHStack = QHBoxLayout()
         periodLabel = QLabel("Input signal frequency:")
         periodHStack.addWidget(periodLabel)
+        periodStepper = QSpinBox()
+        periodStepper.setMinimum(1)
+        periodStepper.setMaximum(100)
+        periodStepper.setValue(10)
+        periodHStack.addWidget(periodStepper)
         self.vStack.addLayout(periodHStack)
 
         self.inputsView = InputsView(self)
@@ -248,3 +253,9 @@ class OutputsView(QWidget):
         dummyLayout.addWidget(self.scrollArea)
 
         self.setLayout(dummyLayout)
+
+
+class OutputEntryView(QWidget):
+    def __init__(self, outputsView: OutputsView):
+        super().__init__()
+        self.outputsView = outputsView
