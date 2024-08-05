@@ -12,13 +12,29 @@ from assets import *
 class ContentView(QMainWindow):
     def __init__(self, app: QApplication):
         super().__init__()
+        DEBUG = True
 
         self.inputSequence = [0, 1, 3, 2, 3, 1, 255, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        self.outputGraphs = []
+        self.outputGraphs = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
 
         self.app = app
+        print(self.app.primaryScreen().size())
 
-        self.resolution = (self.app.screens()[0].size().width(), self.app.screens()[0].size().height())
+        shortestScreen = self.app.primaryScreen()
+        for screen in self.app.screens():
+            if screen.size().height() < shortestScreen.size().height():
+                shortestScreen = screen
+
+        self.resolution = (shortestScreen.size().width(), shortestScreen.size().height()) if not DEBUG else (1920, 1080)
         self.guiScale = self.resolution[1]/1080
 
         self.setFixedHeight(int(self.resolution[1] / 3 * 2))

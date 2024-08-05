@@ -32,6 +32,11 @@ class SidebarView(QWidget):
 
         self.vStack.addWidget(Divider(MacColoursDark.gray))
 
+        periodHStack = QHBoxLayout()
+        periodLabel = QLabel("Input signal frequency:")
+        periodHStack.addWidget(periodLabel)
+        self.vStack.addLayout(periodHStack)
+
         self.inputsView = InputsView(self)
         self.vStack.addWidget(self.inputsView)
 
@@ -42,10 +47,10 @@ class SidebarView(QWidget):
 
         buttonsHStack = QHBoxLayout()
 
-        self.newButton = QPushButton("Nowa makieta")
+        self.newButton = QPushButton("New board")
         self.newButton.setFixedHeight(int(48 * self.guiScale))
 
-        self.startButton = QPushButton("Uruchom")
+        self.startButton = QPushButton("Run")
         self.startButton.setFixedHeight(int(48 * self.guiScale))
         self.startButton.setStyleSheet(f"background-color: rgba{QPalette().accent().color().getRgb()};")
         self.startButton.setFont(QFont("!", int(18 * self.guiScale)))
